@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 import sys
- 
-# maps words to their counts
-count = 0
+correct = 0
 total = 0
-for line in sys.stdin:
-	line = line.strip()
+for lines in sys.stdin:
+	line = lines.strip()
 	acc = line.split('\t')
 	total = total + 1
 	if acc[0] == '1':
-		count = count + 1
-print(count*100)/total
+		correct = correct + 1
+print(correct*100)/total

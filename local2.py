@@ -1,7 +1,7 @@
 import re
 import math
-classes = dict()
-final = dict()
+clss = dict()
+dct = dict()
 w = set()
 def train():
     f = open("/scratch/ds222-2017/assignment-1/DBPedia.verysmall/verysmall_train.txt",'r')
@@ -11,20 +11,19 @@ def train():
         key = words[0]
         key1 = key.split(',')
         for k in key1:
-            if (k not in classes):
-                classes[k] = 1
-                final[k] = dict()
+            if (k not in clss):
+                clss[k] = 1
+                dct[k] = dict()
             else:
-                classes[k] = classes[k] + 1
+                clss[k] = clss[k] + 1
 
         for i in words[1:]:
-            i = re.sub(r'[^\w\s]','',i)
             w.add(i)
             for k in key1:
-                if(i not in final[k]):
-                    final[k][i] = 1
+                if(i not in dct[k]):
+                    dct[k][i] = 1
                 else:
-                    final[k][i] = final[k][i] + 1
+                    dct[k][i] = dct[k][i] + 1
             
     print(len(w))
     
@@ -32,26 +31,24 @@ def train():
 def test():
     f = open("/scratch/ds222-2017/assignment-1/DBPedia.verysmall/verysmall_test.txt",'r')
     lines = f.readlines()
-    total_count = 0
-    count = 0
+    total_cnt = 0
+    cnt = 0
     dd=1
     m = 1
     lw = len(w)
     for x in lines:
-        total_count = total_count + 1
+        total_cnt = total_cnt + 1
         words = x.split(" ")
         key = words[0]
         key1 = key.split(',')
         predicted = ""
         maxi = 0
-        for cla in classes:
-            
-            clp = (classes[cla]) / sum(classes.values())
+        for cla in clss:
+            clp = (clss[cla]) / sum(clss.values())
             value = math.log10(clp)
-            fc = final[cla]
+            fc = dct[cla]
             s = sum(fc.values())
             for i in words[1:]:
-                i = re.sub(r'[^\w\s]','',i)
                 c = fc.get(i)
                 if c is None:
                     v = 1;
@@ -67,17 +64,15 @@ def test():
                 predicted = cla
         
         if predicted in key1:
-            count = count + 1
-
-        if total_count%10000 == 0:
-                print(total_count)
+            cnt = cnt + 1
         
         
-    print((count * 100) / total_count)  
+    print((cnt * 100) / total_cnt)  
 
 
+tart = time.time()
 train()
 test()
-#print(sum(classes.values()))
-#print(final['English-language_journals'])
+print("Total time takem: %f" %(time.time() - start))
+
 
