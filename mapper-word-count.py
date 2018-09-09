@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import sys
-l=list()
-signal(SIGPIPE,SIG_DFL)
 for lines in sys.stdin:
     line = lines.strip()
     word = line.split()
