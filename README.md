@@ -1,7 +1,7 @@
 # DS222-Assignment-1
 
-local1.py : Local Naive Bayes implementation of implementation_. 
-local2.py : Local Naive Bayes implementation of implementation_.
+local1.py : Local Naive Bayes implementation of implementation_1. 
+local2.py : Local Naive Bayes implementation of implementation_2.
 
 1. mapper-word-count.py, reducer-word-count.py : These will do the word counting.
 2. mapper-class-counter.py, reducer-class-counter.py : These files count the number of occurrences of each class and the number of words in them.
